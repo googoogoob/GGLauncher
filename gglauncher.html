@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>GGLauncher</title>
+  <script>
+    //About blank cloaker function
+    function ABBlank(){
+      if (true) {
+        let inFrame
+        try {
+            inFrame = window !== top
+        } catch (e) {
+            inFrame = true
+        }
+        if (!inFrame && !navigator.userAgent.includes("Firefox")) {
+            const popup = open("about:blank", "_blank")  
+            if (!popup || popup.closed) {
+                alert("allow me to do stuff, thats the whoel point of ts")
+            } else {
+                const doc = popup.document
+                const iframe = doc.createElement("iframe")
+                const style = iframe.style
+                const link = doc.createElement("link")
+                const name = localStorage.getItem("name") || "My Drive - Google Drive";
+                const icon = localStorage.getItem("icon") || "https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png";
+                doc.title = name;
+                link.rel = "icon";
+                link.href = icon;
+                iframe.src = location.href
+                style.position = "fixed"
+                style.top = style.bottom = style.left = style.right = 0
+                style.border = style.outline = "none"
+                style.width = style.height = "100%"
+                doc.head.appendChild(link);
+                doc.body.appendChild(iframe)
+                location.replace("https://drive.google.com")
+            }
+        }
+      }
+    }
+  </script>
+  <style>
+  body {
+  font-family: "Courier New", Courier, monospace;
+}
+h1{
+    text-align: center;
+}
+p{
+  text-align: center;
+}
+button{
+    justify-content: center;
+}
+.container-flex {
+  display: flex;
+  justify-content: center;
+}
+button {
+  font-family: Arial;
+  background-color: #333333;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 10px 0;
+  z-index: 1;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Hide scrollbars on the main page */
+}
+iframe {
+  display: block;   /* Change from inline (default) to block to prevent extra spacing */
+  height: 100vh;    /* Set height to 100% of the viewport height */
+  width: 100vw;     /* Set width to 100% of the viewport width */
+  border: none;     /* Remove default border */
+}
+    </style>
+</head>
+
+<body>
+    <div id="iframe-container"></div>
+    <h1 id="load">Launch goob360(Go guardian launcher)</h1>
+    <p><strong>Instructions</strong> <br> Launch button will open google drive and about blank, open google drive for 5 seconds and then go to about blank</p>
+    <div class="container-flex">
+  <button onclick="setTimeout(launchsite(), 100)">Launch</button>
+</div>
+  <script>
+    function changetext1() {
+        document.getElementById("load").innerHTML = "Please wait...";
+    }
+        function launchsite(){
+        ABBlank();// 1. Create the iframe element
+        const newIframe = document.createElement("iframe");
+
+        // 2. Set attributes (e.g., source URL, dimensions, title)
+        newIframe.setAttribute("src", "https://googoogoob.github.io");
+        newIframe.style.width = "100%";
+        newIframe.style.height = "900px";
+        newIframe.title = "something"; // Good practice for accessibility
+
+        // Optional: Add an event listener to run code once the iframe is loaded
+        newIframe.addEventListener("load", (e) => {
+            console.log("The iframe is loaded");
+        });
+ 
+        // 3. Append to the DOM (in this case, a specific container div)
+        document.getElementById("iframe-container").appendChild(newIframe);
+
+        // To append directly to the body, you would use:
+        // document.body.appendChild(newIframe);
+      }
+    </script>
+</body>
+
+</html>
