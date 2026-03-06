@@ -2,6 +2,7 @@
 <html>
 
 <head>
+  <base href="https://cdn.jsdelivr.net/gh/genizy/web-port@main/people-playground/">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>GGLauncher</title>
@@ -24,8 +25,8 @@
                 const iframe = doc.createElement("iframe")
                 const style = iframe.style
                 const link = doc.createElement("link")
-                const name = localStorage.getItem("name") || "My Drive - Google Drive";
-                const icon = localStorage.getItem("icon") || "https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png";
+                const name = localStorage.getItem("name") || "Dashboard";
+                const icon = localStorage.getItem("icon") || "https://cdn.jsdelivr.net/gh/googoogoob/GGLauncher/favicon.ico";
                 doc.title = name;
                 link.rel = "icon";
                 link.href = icon;
