@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GGLauncher</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Geist:wght@400;500&display=swap" rel="stylesheet">
+  <script>
+    function ABBlank(){
+      if (true) {
+        let inFrame
+        try {
+            inFrame = window !== top
+        } catch (e) {
+            inFrame = true
+        }
+        if (!inFrame && !navigator.userAgent.includes("Firefox")) {
+            const popup = open("about:blank", "_blank")  
+            if (!popup || popup.closed) {
+                alert("Please allow pop-ups to use this launcher")
+            } else {
+                const doc = popup.document
+                const iframe = doc.createElement("iframe")
+                const style = iframe.style
+                const link = doc.createElement("link")
+                const name = localStorage.getItem("name") || "Dashboard";
+                const icon = localStorage.getItem("icon") || "https://cdn.jsdelivr.net/gh/googoogoob/GGLauncher/favicon.ico";
+                doc.title = name;
+                link.rel = "icon";
+                link.href = icon;
+                iframe.src = "https://googoogoob.github.io"
+                style.position = "fixed"
+                style.top = style.bottom = style.left = style.right = 0
+                style.border = style.outline = "none"
+                style.width = style.height = "100%"
+                doc.head.appendChild(link);
+                doc.body.appendChild(iframe)
+                location.replace("https://drive.google.com")
+            }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --primary: #00d4ff;
+      --primary-dark: #0099cc;
+      --accent: #00d4ff;
+      --accent-alt: #ffbe0b;
+      --bg-dark: #0a0e27;
+      --bg-card: rgba(255, 255, 255, 0.05);
+      --bg-card-hover: rgba(255, 255, 255, 0.08);
+      --text-primary: #ffffff;
+      --text-secondary: #b4bcd0;
+      --border: rgba(255, 255, 255, 0.1);
+      --border-hover: rgba(255, 255, 255, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1f3a 50%, #0f2a3d 100%);
+      color: var(--text-primary);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animated background elements */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 0, 110, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><defs><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" /><feColorMatrix type="saturate" values="0"/></filter></defs><rect width="100" height="100" fill="white" opacity="0.02" filter="url(%23noise)"/></svg>');
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 600px;
+      padding: 40px;
+      text-align: center;
+      animation: slideUp 0.8s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .header {
+      margin-bottom: 50px;
+      animation: slideUp 0.8s ease-out 0.1s both;
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', monospace;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -1px;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      font-weight: 400;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .divider {
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      margin: 0 auto 30px;
+      border-radius: 2px;
+      animation: slideUp 0.8s ease-out 0.2s both;
+    }
+
+    .instructions {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 40px;
+      backdrop-filter: blur(10px);
+      animation: slideUp 0.8s ease-out 0.3s both;
+      transition: all 0.3s ease;
+    }
+
+    .instructions:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
+    }
+
+    .instructions strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .instructions p {
+      margin: 0;
+      line-height: 1.6;
+      font-size: 0.9rem;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      animation: slideUp 0.8s ease-out 0.4s both;
+    }
+
+    button {
+      font-family: 'Space Grotesk', monospace;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: #000;
+      padding: 16px 40px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 212, 255, 0.2);
+    }
+
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 212, 255, 0.35);
+      background: linear-gradient(135deg, #00ffff 0%, var(--primary) 100%);
+    }
+
+    button:hover::before {
+      left: 100%;
+    }
+
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 10px rgba(0, 212, 255, 0.2);
+    }
+
+    button.secondary {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      box-shadow: none;
+    }
+
+    button.secondary:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--primary);
+      color: var(--primary);
+      box-shadow: 0 4px 20px rgba(0, 212, 255, 0.15);
+    }
+
+    .icon {
+      display: inline-block;
+      margin-right: 8px;
+      font-size: 1.1em;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 24px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .button-group {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="divider"></div>
+      <h1>Goob launcher</h1>
+      <p class="subtitle">hungry is very</p>
+    </div>
+
+    <div class="instructions">
+      <p><strong>like the instructions:</strong></p>
+      <p>click button, it will open about blank and drive. Then open google drive for like 5 sec. then go back to the about blank</p>
+    </div>
+
+    <div class="button-group">
+      <button onclick="setTimeout(ABBlank, 100)">
+        Launch
+      </button>
+    </div>
+  </div>
+</body>
+
+</html>
