@@ -41,7 +41,7 @@
         }
       }
     }
-  </script>
+</script>
   <style>
     :root {
       --primary: #00d4ff;
@@ -292,6 +292,8 @@
     <div class="instructions">
       <p><strong>like the instructions:</strong></p>
       <p>click button, it will open about blank and drive. Then open google drive for like 5 sec. then go back to the about blank</p>
+      <br>
+      <p id="versionUpToDate">NA</p>
     </div>
 
     <div class="button-group">
@@ -300,6 +302,33 @@
       </button>
     </div>
   </div>
+  <script>
+    async function getCurrentVersion(){
+  try{
+      const r = await fetch('https://cdn.jsdelivr.net/gh/googoogoob/GGLauncher/ver.txt', {cache: 'no-store'});
+      if(!r.ok) return null;
+      const text = await r.text();
+      return text.trim();
+  }catch(e){
+      return null;
+  }
+}
+
+async function checkVersion(){
+  try{
+    const version = await getCurrentVersion();  // FIX: Call the function with () and await it
+    if(version != "1.1"){  // FIX: Compare the result, not the function itself
+      alert("test")
+      document.getElementById("versionUpToDate").innerHTML = "New text!";
+
+    }
+  }catch(e){
+    return null
+  }
+}
+
+checkVersion();
+  </script>
 </body>
 
 </html>
