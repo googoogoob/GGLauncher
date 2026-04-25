@@ -293,7 +293,7 @@
       <p><strong>like the instructions:</strong></p>
       <p>click button, it will open about blank and drive. Then open google drive for like 5 sec. then go back to the about blank</p>
       <br>
-      <p id="versionUpToDate">NA</p>
+      <p id="versionUpToDate">Launcher up to date!</p>
     </div>
 
     <div class="button-group">
@@ -319,7 +319,7 @@ async function checkVersion(){
     const version = await getCurrentVersion();  // FIX: Call the function with () and await it
     if(version != "1.1"){  // FIX: Compare the result, not the function itself
       alert("test")
-      document.getElementById("versionUpToDate").innerHTML = "New text!";
+      document.getElementById("versionUpToDate").innerHTML = "Update available. go to https://github.com/googoogoob/GGLauncher/releases/tag/relese and download new version";
 
     }
   }catch(e){
