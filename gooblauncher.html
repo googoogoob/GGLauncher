@@ -286,7 +286,7 @@
     <div class="header">
       <div class="divider"></div>
       <h1>Goob launcher</h1>
-      <p class="subtitle">hungry is very</p>
+      <p class="subtitle" id="quote">hungry is very</p>
     </div>
 
     <div class="instructions">
@@ -317,7 +317,7 @@
 async function checkVersion(){
   try{
     const version = await getCurrentVersion();  // FIX: Call the function with () and await it
-    if(version != "1.1"){  // FIX: Compare the result, not the function itself
+    if(version != "1.0"){  // FIX: Compare the result, not the function itself
       alert("test")
       document.getElementById("versionUpToDate").innerHTML = "Update available. go to https://github.com/googoogoob/GGLauncher/releases/tag/relese and download new version";
 
@@ -326,8 +326,18 @@ async function checkVersion(){
     return null
   }
 }
-
+async function getQuote(){
+  try{
+    const l = await fetch('https://cdn.jsdelivr.net/gh/googoogoob/GGLauncher/quote.txt', {cache: 'no-store'});
+    if(!l.ok) return null;
+    const currentQuote = await l.text();
+    document.getElementById("quote").innerHTML = currentQuote;
+  }catch(e){
+    return null
+  }
+}
 checkVersion();
+getQuote();
   </script>
 </body>
 
