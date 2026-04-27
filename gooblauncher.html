@@ -328,7 +328,7 @@ async function checkVersion(){
 }
 async function getQuote(){
   try{
-    const l = await fetch('https://cdn.jsdelivr.net/gh/googoogoob/GGLauncher/quote.txt', {cache: 'no-store'});
+    const l = await fetch('https://cdn.jsdelivr.net/gh/googoogoob/GGLauncher@latest/quote.txt', {cache: 'no-store'});
     if(!l.ok) return null;
     const currentQuote = await l.text();
     document.getElementById("quote").innerHTML = currentQuote;
